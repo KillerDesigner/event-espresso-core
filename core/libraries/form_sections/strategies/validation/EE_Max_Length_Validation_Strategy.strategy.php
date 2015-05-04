@@ -17,14 +17,19 @@ class EE_Max_Length_Validation_Strategy extends EE_Validation_Strategy_Base{
 		parent::__construct( $validation_error_message );
 	}
 
+
+
 	/**
-	 * @param $normalized_value
+	 * @param mixed $normalized_value
+	 * @throws \EE_Validation_Error
 	 */
 	public function validate($normalized_value) {
-		if( $this->_max_length !== INF &&
-				$normalized_value &&
-				is_string( $normalized_value ) &&
-				 strlen( $normalized_value ) > $this->_max_length){
+		if (
+			$this->_max_length !== INF &&
+			$normalized_value &&
+			is_string( $normalized_value ) &&
+			strlen( $normalized_value ) > $this->_max_length
+		){
 			throw new EE_Validation_Error( $this->get_validation_error_message(), 'maxlength' );
 		}
 	}
